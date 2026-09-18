@@ -1,0 +1,863 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>hello jude</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #FBE0EC;
+    --bg2: #F7CFE0;
+    --ink: #5A3F8C;
+    --ink-soft: #8A6BB8;
+    --violet: #8B5FBF;
+    --violet-deep: #5A3F8C;
+    --lilac: #C9AEE0;
+    --lilac-pale: #F0DCF0;
+    --card: #FFFFFF;
+    --font-display: 'Baloo 2', cursive;
+    --font-body: 'Nunito', sans-serif;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #2A1826;
+      --bg2: #362030;
+      --ink: #E7D9F7;
+      --ink-soft: #C9AEE0;
+      --violet: #C79DEE;
+      --violet-deep: #EADCFB;
+      --lilac: #8B66B8;
+      --lilac-pale: #3B2438;
+      --card: #362030;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #2A1826;
+    --bg2: #362030;
+    --ink: #E7D9F7;
+    --ink-soft: #C9AEE0;
+    --violet: #C79DEE;
+    --violet-deep: #EADCFB;
+    --lilac: #8B66B8;
+    --lilac-pale: #3B2438;
+    --card: #362030;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  .wrap {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  h1, h2, .display {
+    font-family: var(--font-display);
+    color: var(--violet-deep);
+    margin: 0;
+  }
+
+  /* ---------------- Intro screen ---------------- */
+
+  #screen-intro {
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: radial-gradient(circle at 30% 20%, var(--bg2), var(--bg) 70%);
+    padding: 40px 20px;
+    overflow: hidden;
+  }
+
+  .intro-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    flex-wrap: wrap;
+    max-width: 780px;
+  }
+
+  .sticker {
+    width: 128px;
+    flex: none;
+  }
+
+  .sticker-photo {
+    aspect-ratio: 1/1;
+    background: var(--lilac-pale);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--lilac);
+  }
+
+  .sticker-photo svg {
+    width: 46%;
+    height: 46%;
+  }
+
+  .sticker-photo img,
+  .polaroid-photo img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    border-radius: inherit;
+  }
+
+  .intro-center {
+    text-align: center;
+    max-width: 340px;
+  }
+
+  .intro-eyebrow {
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    margin-bottom: 6px;
+  }
+
+  #screen-intro h1 {
+    font-size: clamp(2.6rem, 11vw, 4.2rem);
+    line-height: 1;
+    font-weight: 700;
+    margin-bottom: 30px;
+  }
+
+  #hi-btn {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #fff;
+    background: var(--violet);
+    border: none;
+    padding: 14px 46px;
+    border-radius: 999px;
+    box-shadow: 0 5px 0 var(--violet-deep);
+    cursor: pointer;
+    animation: idle-bounce 2.2s ease-in-out infinite;
+  }
+
+  #hi-btn:hover {
+    filter: brightness(1.05);
+  }
+
+  #hi-btn:active {
+    transform: translateY(4px);
+    box-shadow: 0 1px 0 var(--violet-deep);
+  }
+
+  #hi-btn:focus-visible {
+    outline: 3px solid var(--violet);
+    outline-offset: 3px;
+  }
+
+  @keyframes idle-bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-6px);
+    }
+  }
+
+  .doodle-star {
+    position: absolute;
+    color: var(--lilac);
+    opacity: 0.6;
+    animation: bob 5s ease-in-out infinite;
+  }
+
+  .doodle-star svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .ds1 {
+    width: 26px;
+    top: 12%;
+    left: 10%;
+    animation-delay: 0s;
+  }
+
+  .ds2 {
+    width: 18px;
+    top: 22%;
+    right: 12%;
+    animation-delay: 1s;
+    color: var(--violet);
+  }
+
+  .ds3 {
+    width: 22px;
+    bottom: 16%;
+    left: 15%;
+    animation-delay: 2s;
+  }
+
+  .ds4 {
+    width: 16px;
+    bottom: 24%;
+    right: 16%;
+    animation-delay: 0.6s;
+    color: var(--violet);
+  }
+
+  @keyframes bob {
+    0%, 100% {
+      transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+      transform: translateY(-10px) rotate(8deg);
+    }
+  }
+
+  @media (max-width: 560px) {
+    .intro-row {
+      gap: 14px;
+    }
+
+    .sticker {
+      width: 92px;
+      padding: 8px 8px 18px;
+    }
+
+    .doodle-star {
+      display: none;
+    }
+  }
+
+  /* ---------------- Main content ---------------- */
+
+  #screen-main {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  #screen-main.visible {
+    opacity: 1;
+  }
+
+  #screen-main[hidden] {
+    display: none;
+  }
+
+  section {
+    padding: 60px 0;
+  }
+
+  h2 {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    margin-bottom: 24px;
+    font-weight: 600;
+  }
+
+  p {
+    max-width: 62ch;
+  }
+
+  .divider {
+    display: flex;
+    justify-content: center;
+    color: var(--lilac);
+    margin: 0;
+  }
+
+  .divider svg {
+    width: 120px;
+    height: auto;
+  }
+
+  .note p {
+    font-size: 1.06rem;
+  }
+
+  .note p + p {
+    margin-top: 1em;
+  }
+
+  .signoff {
+    font-family: var(--font-display);
+    color: var(--violet);
+    margin-top: 20px;
+    font-size: 1.1rem;
+  }
+
+  .gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .polaroid {
+    width: 58%;
+  }
+
+  .polaroid:nth-child(odd) {
+    align-self: flex-start;
+  }
+
+  .polaroid:nth-child(even) {
+    align-self: flex-end;
+  }
+
+  .polaroid-photo {
+    aspect-ratio: 1/1;
+    background: var(--lilac-pale);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--lilac);
+  }
+
+  .ph-num {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--lilac);
+  }
+
+  button:focus-visible {
+    outline: 2px solid var(--violet);
+    outline-offset: 2px;
+  }
+
+  .celebrate-section {
+    text-align: center;
+  }
+
+  .cake {
+    width: 128px;
+    height: auto;
+    color: var(--violet);
+    margin: 0 auto 20px;
+    display: block;
+  }
+
+  .cake .flame {
+    color: #E8A33D;
+  }
+
+  #celebrate-btn {
+    font-family: var(--font-display);
+    background: var(--violet);
+    color: #fff;
+    border: none;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 14px 28px;
+    border-radius: 999px;
+    cursor: pointer;
+    box-shadow: 0 5px 0 var(--violet-deep);
+  }
+
+  #celebrate-btn:active {
+    transform: translateY(4px);
+    box-shadow: 0 1px 0 var(--violet-deep);
+  }
+
+  footer {
+    text-align: center;
+    padding: 36px 0 56px;
+    color: var(--ink-soft);
+    font-size: 0.9rem;
+  }
+
+  /* ---------------- Falling petals ---------------- */
+
+  .petal {
+    position: fixed;
+    top: -5%;
+    width: 12px;
+    height: 12px;
+    clip-path: polygon(
+      50% 0%,
+      61% 35%,
+      98% 35%,
+      68% 57%,
+      79% 91%,
+      50% 70%,
+      21% 91%,
+      32% 57%,
+      2% 35%,
+      39% 35%
+    );
+    pointer-events: none;
+    z-index: 999;
+    opacity: 0.9;
+    animation-name: fall;
+    animation-timing-function: ease-in;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes fall {
+    0% {
+      transform: translate(0, 0) rotate(0deg);
+      opacity: 0.95;
+    }
+
+    100% {
+      transform: translate(var(--drift, 40px), 110vh) rotate(300deg);
+      opacity: 0.2;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    .petal,
+    .doodle-star,
+    #hi-btn {
+      animation: none;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .gallery {
+      gap: 22px;
+    }
+
+    .polaroid {
+      width: 72%;
+    }
+
+    section {
+      padding: 48px 0;
+    }
+  }
+</style>
+</head>
+
+<body>
+
+<!-- ROSÉ - number one girl -->
+<audio id="bg-music" preload="auto">
+  <source src="number-one-girl.mp3" type="audio/mpeg">
+</audio>
+
+<div id="screen-intro">
+
+  <span class="doodle-star ds1">
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 2l2.2 6.8H21l-5.6 4.1L17.6 20 12 15.9 6.4 20l2.2-7.1L3 8.8h6.8z"/>
+    </svg>
+  </span>
+
+  <span class="doodle-star ds2">
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 2l2.2 6.8H21l-5.6 4.1L17.6 20 12 15.9 6.4 20l2.2-7.1L3 8.8h6.8z"/>
+    </svg>
+  </span>
+
+  <span class="doodle-star ds3">
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 2l2.2 6.8H21l-5.6 4.1L17.6 20 12 15.9 6.4 20l2.2-7.1L3 8.8h6.8z"/>
+    </svg>
+  </span>
+
+  <span class="doodle-star ds4">
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 2l2.2 6.8H21l-5.6 4.1L17.6 20 12 15.9 6.4 20l2.2-7.1L3 8.8h6.8z"/>
+    </svg>
+  </span>
+
+  <div class="intro-row">
+
+    <div class="sticker left">
+      <div class="sticker-photo" id="char-photo-left">
+        <img src="char-left.png" alt="Character photo left">
+      </div>
+    </div>
+
+    <div class="intro-center">
+      <p class="intro-eyebrow">psst. hey.</p>
+
+      <h1 id="hero-name">hello jude</h1>
+
+      <button id="hi-btn" type="button">
+        hi
+      </button>
+    </div>
+
+    <div class="sticker right">
+      <div class="sticker-photo" id="char-photo-right">
+        <img src="char-right.png" alt="Character photo right">
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="screen-main" hidden>
+
+  <div class="divider" aria-hidden="true">
+    <svg viewBox="0 0 140 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 10H50" stroke="currentColor" stroke-width="1.5"/>
+      <path d="M90 10H140" stroke="currentColor" stroke-width="1.5"/>
+      <ellipse cx="70" cy="6" rx="4" ry="6" fill="currentColor"/>
+      <ellipse cx="62" cy="10" rx="3.5" ry="5" fill="currentColor" opacity="0.7"/>
+      <ellipse cx="78" cy="10" rx="3.5" ry="5" fill="currentColor" opacity="0.7"/>
+    </svg>
+  </div>
+
+  <!-- ---------------- Note ---------------- -->
+
+  <section class="note">
+    <div class="wrap">
+
+      <h2>ok. hi. for real this time</h2>
+
+      <p>
+        you graduated. that's it, you're done, high school can't get you anymore.
+        no more 7am alarms unless you're choosing to suffer for other reasons now.
+      </p>
+
+      <p>
+        genuinely proud of you though, dork. you pulled off three years and somehow
+        still text back within five minutes.
+      </p>
+
+      <p>
+        i hope you actually take a moment to realize what you just did. three years
+        of classes, assignments, exams, early mornings, exhausting days, and
+        everything else that came with it, and somehow you made it all the way to the end.
+      </p>
+
+      <p>
+        it's kinda weird thinking about how something that was just part of your
+        everyday life for so long is suddenly over. all those random school days,
+        the people you met, the stupid moments, the stressful ones, and all the
+        little things you probably didn't think twice about are now memories.
+      </p>
+
+      <p>
+        and now you get to start something completely new. no more having someone
+        tell you where you need to be at 7am, no more pretending to listen when
+        you're half asleep, and no more saying "i'll do it later" about homework
+        because there isn't any.
+      </p>
+
+      <p>
+        you deserve to be proud of yourself, seriously. even if you're acting like
+        it's not a big deal, it is. you worked for this, you made it through, and
+        now you can finally say that you graduated.
+      </p>
+
+      <p>
+        so congratulations, dork. i'm genuinely happy for you, and i'm really proud
+        of you. now go enjoy being free for a little while before life finds another
+        way to make you wake up early.
+      </p>
+
+      <p class="signoff">
+        — you know who
+      </p>
+
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true">
+    <svg viewBox="0 0 140 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 10H50" stroke="currentColor" stroke-width="1.5"/>
+      <path d="M90 10H140" stroke="currentColor" stroke-width="1.5"/>
+      <ellipse cx="70" cy="6" rx="4" ry="6" fill="currentColor"/>
+      <ellipse cx="62" cy="10" rx="3.5" ry="5" fill="currentColor" opacity="0.7"/>
+      <ellipse cx="78" cy="10" rx="3.5" ry="5" fill="currentColor" opacity="0.7"/>
+    </svg>
+  </div>
+
+  <!-- ---------------- Gallery ---------------- -->
+
+  <section class="gallery-section">
+    <div class="wrap">
+
+      <h2>evidence (exhibit a-f)</h2>
+
+      <div class="gallery">
+
+        <figure class="polaroid">
+          <div class="polaroid-photo" id="photo-1">
+            <img src="photo-1.png" alt="Photo 1">
+          </div>
+        </figure>
+
+        <figure class="polaroid">
+          <div class="polaroid-photo" id="photo-2">
+            <img src="photo-2.png" alt="Photo 2">
+          </div>
+        </figure>
+
+        <figure class="polaroid">
+          <div class="polaroid-photo" id="photo-3">
+            <img src="photo-3.png" alt="Photo 3">
+          </div>
+        </figure>
+
+        <figure class="polaroid">
+          <div class="polaroid-photo" id="photo-4">
+            <img src="photo-4.png" alt="Photo 4">
+          </div>
+        </figure>
+
+        <figure class="polaroid">
+          <div class="polaroid-photo" id="photo-5">
+            <img src="photo-5.png" alt="Photo 5">
+          </div>
+        </figure>
+
+        <figure class="polaroid">
+          <div class="polaroid-photo" id="photo-6">
+            <img src="photo-6.png" alt="Photo 6">
+          </div>
+        </figure>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true">
+    <svg viewBox="0 0 140 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 10H50" stroke="currentColor" stroke-width="1.5"/>
+      <path d="M90 10H140" stroke="currentColor" stroke-width="1.5"/>
+      <ellipse cx="70" cy="6" rx="4" ry="6" fill="currentColor"/>
+      <ellipse cx="62" cy="10" rx="3.5" ry="5" fill="currentColor" opacity="0.7"/>
+      <ellipse cx="78" cy="10" rx="3.5" ry="5" fill="currentColor" opacity="0.7"/>
+    </svg>
+  </div>
+
+  <!-- ---------------- Celebration ---------------- -->
+
+  <section class="celebrate-section">
+    <div class="wrap">
+
+      <svg class="cake" viewBox="0 0 160 130" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+
+        <path
+          d="M60 24c0-6 4-10 4-16 0 6 4 10 4 16"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+        />
+
+        <path
+          class="flame"
+          d="M64 8c3 3 3 6 0 9-3-3-3-6 0-9z"
+          fill="currentColor"
+        />
+
+        <path
+          d="M80 20c0-6 4-10 4-16 0 6 4 10 4 16"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+        />
+
+        <path
+          class="flame"
+          d="M84 4c3 3 3 6 0 9-3-3-3-6 0-9z"
+          fill="currentColor"
+        />
+
+        <path
+          d="M100 24c0-6 4-10 4-16 0 6 4 10 4 16"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+        />
+
+        <path
+          class="flame"
+          d="M104 8c3 3 3 6 0 9-3-3-3-6 0-9z"
+          fill="currentColor"
+        />
+
+        <rect
+          x="30"
+          y="46"
+          width="100"
+          height="26"
+          rx="3"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+        />
+
+        <path
+          d="M30 59h100"
+          stroke="currentColor"
+          stroke-width="1.5"
+          opacity="0.6"
+        />
+
+        <path
+          d="M20 82c6-8 14-8 20 0s14 8 20 0 14-8 20 0 14 8 20 0 14-8 20 0"
+          stroke="currentColor"
+          stroke-width="2.5"
+          fill="none"
+          stroke-linecap="round"
+        />
+
+        <rect
+          x="18"
+          y="82"
+          width="124"
+          height="34"
+          rx="4"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+        />
+
+        <path
+          d="M18 100h124"
+          stroke="currentColor"
+          stroke-width="1.5"
+          opacity="0.6"
+        />
+
+      </svg>
+
+      <button id="celebrate-btn" type="button">
+        hit this for a lil celebration
+      </button>
+
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      made by someone who spent way too long picking fonts for this
+    </div>
+  </footer>
+
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var reduceMotion =
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  var hiButton = document.getElementById("hi-btn");
+  var main = document.getElementById("screen-main");
+  var music = document.getElementById("bg-music");
+
+  hiButton.addEventListener("click", function () {
+
+    /*
+      Start ROSÉ - number one girl.
+
+      Because this click is a user interaction,
+      browsers normally allow the audio to begin here.
+    */
+    music.volume = 0.45;
+
+    music.play().catch(function (error) {
+      console.log("Music could not start:", error);
+    });
+
+    /*
+      Open the main page.
+    */
+    main.hidden = false;
+
+    requestAnimationFrame(function () {
+      main.classList.add("visible");
+
+      main.scrollIntoView({
+        behavior: reduceMotion ? "auto" : "smooth",
+        block: "start"
+      });
+    });
+
+  });
+
+  /*
+    Celebration button
+  */
+  document.getElementById("celebrate-btn").addEventListener("click", function () {
+
+    if (reduceMotion) return;
+
+    var colors = [
+      "var(--lilac)",
+      "var(--violet)",
+      "var(--violet)"
+    ];
+
+    for (var i = 0; i < 28; i++) {
+
+      (function () {
+
+        var petal = document.createElement("div");
+
+        petal.className = "petal";
+
+        var duration = 3 + Math.random() * 2.5;
+        var delay = Math.random() * 0.6;
+
+        petal.style.left =
+          (Math.random() * 100) + "vw";
+
+        petal.style.setProperty(
+          "--drift",
+          (Math.random() * 120 - 60) + "px"
+        );
+
+        petal.style.animationDuration =
+          duration + "s";
+
+        petal.style.animationDelay =
+          delay + "s";
+
+        petal.style.background =
+          colors[Math.floor(Math.random() * colors.length)];
+
+        document.body.appendChild(petal);
+
+        setTimeout(function () {
+          petal.remove();
+        }, (duration + delay) * 1000 + 200);
+
+      })();
+    }
+
+  });
+
+})();
+</script>
+
+</body>
+</html>
+```
